@@ -24,8 +24,6 @@ export class ProductService {
         }
     }
     
-    test2(){
-        console.log('Test 2 method called');
-    }
+
   
 }
