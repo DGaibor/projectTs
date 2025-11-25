@@ -10,12 +10,11 @@ export class UserController {
         this.service = new UserService();
     }
 
-    async post(req: Request , res: Response) {
+    async create(req: Request , res: Response) {
 
         try{
 
             const body = req.body;
-
             const name = body.name;
             const email = body.email;
             const password = body.password;
@@ -34,6 +33,26 @@ export class UserController {
         }
 
 
+    }
+    
+    async login(req: Request , res: Response){
+        try{
+            const body = req.body;
+
+            const email = body.email;
+            const password = body.password;
+
+            const message = await this.service.login(email,password)
+            
+            return res.status(200).json({
+                message: message
+            })
+        }catch (e) {
+            res.status(500).json({
+                message: 'Internal Server Error'
+            })
+        }
+       
     }
 
 }
