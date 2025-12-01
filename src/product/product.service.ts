@@ -15,7 +15,6 @@ export class ProductService {
                     name: name,
                     description: description,
                     price: price,
-
                 }
             })
             return 'Product created successfully';

@@ -14,14 +14,12 @@ export class ProductController {
        try{
            
            const body = req.body;
-           
            const name = body.name;
-              const description = body.description;
-                const price = body.price;
+           const description = body.description;
+           const price = body.price;
            
-
            const message = await this.service.create(name, description, price)
-
+           
            return res.status(201).json({
                message: message
            });

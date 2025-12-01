@@ -1,6 +1,7 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import bcrypt from "bcrypt";
-
+import jwt from "jsonwebtoken";
+import "dotenv/config";
 
 export class UserService {
     prisma : PrismaClient;
@@ -33,16 +34,29 @@ export class UserService {
             const user = await this.getUserByEmail(email)
 
             if (user == null) {
-                return 'User or Password invalid';
+                return {
+                    message: 'User or Password invalid',
+                    token: ''
+                    
+                };
             }
             
             const checkPassword = await bcrypt.compare(password, user.password)
             
             if (!checkPassword ) {
-                return 'User or Password invalid';
+                return {
+                    message: 'User or Password invalid',
+                    token: ''
+                };
             }
+            const secretKey = process.env.SECRET_KEY ?? '';
+            const token = jwt.sign({email: user.email, name:user.name}, secretKey)
+            
    
-            return 'User logged in successfully';
+            return {
+                message: 'Login successful',
+                token: token
+            };
         }catch (e) {
         
             throw new Error('LOGIN_ERROR: Could not login user');

@@ -42,11 +42,9 @@ export class UserController {
             const email = body.email;
             const password = body.password;
 
-            const message = await this.service.login(email,password)
+            const data = await this.service.login(email,password)
             
-            return res.status(200).json({
-                message: message
-            })
+            return res.status(200).json(data)
         }catch (e) {
             res.status(500).json({
                 message: 'Internal Server Error'
