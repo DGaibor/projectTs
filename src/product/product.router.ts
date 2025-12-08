@@ -9,5 +9,7 @@ const controller = new ProductController();
 
 productRouter.post('/', privateRoute, (req: Request, res: Response) => controller.post(req,res));
 
+productRouter.get('/', (req: Request, res: Response) => controller.get(req,res));
 
+productRouter.put('/:id', privateRoute, (req: Request, res: Response) => controller.update(req,res));
 

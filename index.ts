@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import { productRouter} from './src/product/product.router';
 import { userRouter } from './src/user/user.router';
+import { orderRouter } from './src/order/order.router';
 import { timeLog } from './src/middleware/auth';
 // configures dotenv to work in your application
 dotenv.config();
@@ -13,6 +14,7 @@ const PORT = process.env.PORT;
 
 app.use('/products', productRouter);
 app.use('/users', userRouter);
+app.use('/orders', orderRouter);
 
 
 app.listen(PORT, () => {
