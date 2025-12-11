@@ -14,12 +14,12 @@ export class OrderService {
 
     async create( order: Order ){
         try{
-            const orderItem = order.products;
+            const oldItems = order.products;
             //[{productId: 1, quantity: 50}, {productId: 2, quantity: 30}, {productId: 3, quantity: 20}]
             
             let newItems: OrderItem[] = [];
             
-            for ( const item of orderItem ){
+            for ( const item of oldItems ){
                 const product = await this.productService.getProductById(item.productId)
                 if (!product){
                     throw new Error(`CREATE_ORDER: Product with ID ${item.productId} not found`);

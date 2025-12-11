@@ -13,9 +13,9 @@ export const timeLog = ( req:Request,res: Response, next:NextFunction )=>{
 
     next();
 }
+privateRoute
 
-
-export const privateRoute = ( req:Request,res: Response, next:NextFunction )=>{
+export const privateRoute = async ( req:Request,res: Response, next:NextFunction )=>{
     const token  = req.headers.authorization;
     if(!token){
         return res.status(401).json({
@@ -29,7 +29,7 @@ export const privateRoute = ( req:Request,res: Response, next:NextFunction )=>{
     try{
         const decode =  jwt.verify(realToken,secretKey) as MyJwtPayload;
         const userService = new UserService();
-        const user = userService.getUserByEmail(decode.email)
+        const user = await userService.getUserByEmail(decode.email)
         
         if(user == null){
            return res.status(401).json({
