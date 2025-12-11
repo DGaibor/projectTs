@@ -5,4 +5,4 @@ import { privateRoute } from '../middleware/auth';
 export const orderRouter = Router();
 
 const controller = new OrderController()
-orderRouter.post('/', ,  (req: Request, res: Response) => controller.create(req, res));
+orderRouter.post('/', privateRoute,  (req: Request, res: Response) => controller.create(req, res));

@@ -13,7 +13,7 @@ export const timeLog = ( req:Request,res: Response, next:NextFunction )=>{
 
     next();
 }
-privateRoute
+
 
 export const privateRoute = async ( req:Request,res: Response, next:NextFunction )=>{
     const token  = req.headers.authorization;
